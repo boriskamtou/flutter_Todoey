@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:flutter_todoey/models/tasks_data.dart';
 
 String newTaskTitle;
 
 class AddNewTask extends StatelessWidget {
-  final Function addTaskCallBack;
-  AddNewTask(this.addTaskCallBack);
+  
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -23,7 +24,7 @@ class AddNewTask extends StatelessWidget {
               top: 30.0,
               left: 30.0,
               right: 30.0,
-              bottom: MediaQuery.of(context).viewInsets.bottom + 20,
+              bottom: MediaQuery.of(context).viewInsets.bottom + 60,
             ),
             child: Column(
               children: <Widget>[
@@ -56,7 +57,8 @@ class AddNewTask extends StatelessWidget {
                       ),
                     ),
                     onPressed: () {
-                      addTaskCallBack(newTaskTitle);
+                      Provider.of<TasksData>(context).addNewTasks(newTaskTitle);
+                      Navigator.pop(context);
                     },
                   ),
                 )
